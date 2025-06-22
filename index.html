@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大阪府公立高校入試 傾向分析詳細インフォグラフィック</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 1.5rem;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .stat-card {
+            background-color: #E0FBFC;
+            color: #3D5A80;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .section-heading {
+            background-color: #3D5A80; /* Dark blue background */
+            color: white; /* White text */
+            font-size: 1.75rem;
+            font-weight: 700;
+            padding: 1rem 1.5rem; /* Add padding to the heading itself */
+            border-radius: 0.5rem; /* Slightly rounded corners for the heading */
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            text-align: center; /* Center align text for headings */
+        }
+        .sub-section-title {
+            color: #00A1E4;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        .detail-icon {
+            flex-shrink: 0;
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+            color: #3D5A80;
+        }
+        .detail-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #475569;
+        }
+        .correct-rate-value {
+            font-weight: 700;
+            color: #00A1E4;
+        }
+        .strategy-level {
+            background-color: #f0f9ff;
+            border-left: 5px solid #00A1E4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .strategy-level-title {
+            font-weight: 700;
+            color: #3D5A80;
+            margin-bottom: 0.5rem;
+        }
+        .strategy-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .strategy-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+        .strategy-list li::before {
+            content: '✓';
+            color: #98DBC6;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <main class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#3D5A80]">大阪府公立高校入試 完全攻略ガイド</h1>
+            <p class="mt-4 text-lg text-slate-600">新人講師向け・大問別詳細分析と問題タイプ別戦略</p>
+            <div class="mt-6">
+                <a href="https://osakakouritu.netlify.app/" target="_blank" class="inline-block bg-[#00A1E4] text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300">
+                    大阪府公立高校入試の概要はこちら
+                </a>
+            </div>
+        </header>
+
+        <section id="overview" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#3D5A80]">1. 全体像を掴む：入試制度の核心</h2>
+            <div class="card p-6 md:p-8">
+                <p class="mb-6 text-slate-700 leading-relaxed">
+                    大阪府の公立高校入試は、学力検査の点数だけでなく、内申点、そして合否ボーダーゾーンでの「自己申告書」評価という多角的な選抜方式が特徴です。特に近年は私立高校授業料無償化の影響で、公立校の競争率が変化しており、正確な情報と戦略がこれまで以上に重要になっています。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 bg-sky-100 rounded-lg">
+                        <div class="text-4xl font-bold text-[#00A1E4]">3種類</div>
+                        <div class="mt-1 text-slate-700">国数英の学力検査問題<br>(A/B/C)</div>
+                    </div>
+                    <div class="p-4 bg-sky-100 rounded-lg">
+                        <div class="text-4xl font-bold text-[#00A1E4]">5タイプ</div>
+                        <div class="mt-1 text-slate-700">学力検査:内申点の<br>評価比率</div>
+                    </div>
+                    <div class="p-4 bg-sky-100 rounded-lg">
+                        <div class="text-4xl font-bold text-[#00A1E4]">90%</div>
+                        <div class="mt-1 text-slate-700">総合点で合格が決まる<br>ボーダーライン</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="abc-problems" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#3D5A80]">2. 戦場を選ぶ：A・B・C問題 徹底比較</h2>
+            <div class="card p-6 md:p-8">
+                <p class="mb-6 text-slate-700 leading-relaxed">
+                    国語・数学・英語で採用されるA(基礎)・B(標準)・C(発展)問題は、単なる難易度の違いではありません。高校側が求める学力レベルを示す指標であり、志望校選びと学習計画の根幹を成します。以下のチャートは、各問題タイプで求められるスキルの違いを可視化したものです。
+                </p>
+                <div class="chart-container h-96 md:h-[450px]">
+                    <canvas id="abcSkillsChart"></canvas>
+                </div>
+                <p class="mt-4 text-center text-sm text-slate-500">
+                    C問題は全方位で高い能力、特に英語の速読力と数学の応用力が突出して求められることがわかります。
+                </p>
+            </div>
+        </section>
+        
+        <section id="subjects" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#3D5A80]">3. 科目別データ分析：得点源と注意点</h2>
+
+            <!-- 国語 -->
+            <div class="card mb-12">
+                <h3 class="text-2xl font-bold text-[#3D5A80] mb-4">🇯🇵 国語：論理的表現力が合否を分ける <span class="text-xl font-normal ml-2">(配点: 90点)</span></h3>
+                <p class="mb-4 text-slate-600">
+                    国語の学力検査は、例年、大問5題で構成されます。令和6年度（R6）の傾向を見ると、文章読解問題が2つ（大問1:説明的文章、<strong class="text-blue-700">大問2:随筆やエッセイなどの文学的文章</strong>）、古典（古文または漢文）が1つ、作文問題が1つ、そして漢字・文法などの小問集合が加わる形式が一般的です。特に配点の約2割を占める作文は最重要対策項目です。
+                </p>
+                
+                <div class="section-heading">大問ごとの詳細分析（R6年度データより）</div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">大問1：説明的文章（論説文/評論文）<span class="text-slate-500 font-normal ml-2">(配点目安: 約30点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：</strong> 指示語・接続語の把握、段落要旨、要約・内容説明の記述。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> B問題 <span class="correct-rate-value">50.3%</span> (大意把握)、C問題 <span class="correct-rate-value">60.9%</span> (内容把握)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：</strong> 各段落の要点を正確に把握し、論理展開を追う練習。本文中の言葉を用いて指定字数内にまとめる要約演習が不可欠です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">大問2：文学的文章（随筆/エッセイなど）<span class="text-slate-500 font-normal ml-2">(配点目安: 約30点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：</strong> 登場人物の心情変化、情景描写からの心情推測、行動理由の説明記述。**R6年度もB問題では「内田樹 著『考える練習』」、C問題では「鷲田清一 著『てつがくの涙』」など、随筆やエッセイが用いられています。純粋な「物語文（小説）」の出題は稀な傾向が続いています。**
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> B問題 <span class="correct-rate-value">38.5%</span> (内容把握と表現記述)、C問題 <span class="correct-rate-value">37.4%</span> (内容把握と表現記述)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> 情景描写や会話文から心情を読み取る練習。比喩表現の理解を深める。心情変化の記述は論理的に。随筆特有の筆者の考えや視点を読み解く練習も重要です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">大問3：古典（古文/漢文）<span class="text-slate-500 font-normal ml-2">(配点目安: 約15点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：：</strong> 古文・漢文の基本的な語彙・文法、歴史的仮名遣い、敬語、句形（再読文字等）の理解と書き下し。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> B問題 <span class="correct-rate-value">88.2%</span> (歴史的仮名遣い)、C問題 <span class="correct-rate-value">90.9%</span> (漢字の読み)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：</strong> 古典語彙と文法の基礎徹底。「誰が、何を、どうしたか」を正確に把握。現代語訳練習を積むことが重要です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">大問4：知識問題（漢字・語句など）<span class="text-slate-500 font-normal ml-2">(配点目安: 約15点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：：</strong> 漢字の読み書き、同音異義語、四字熟語、ことわざ・慣用句。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> B問題 <span class="correct-rate-value">94.9%</span> (漢字の読み)、C問題 <span class="correct-rate-value">88.2%</span> (漢字の書き取り)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> 漢字は中学生までの範囲をドリルで反復練習。語彙力強化は日頃から継続することが重要です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">課題作文<span class="text-slate-500 font-normal ml-2">(配点目安: 18〜20点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題形式：</strong> 自分の意見を理由とともに記述、または資料（グラフ等）を読み取って意見を記述。A:150字、B:200-250字、C:300字。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> B問題 <span class="correct-rate-value">46.0%</span>、C問題 <span class="correct-rate-value">54.6%</span>
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> 「お題読み込み→構成→記述→読み直し」の高速サイクル練習。根拠と論理的展開、指定字数内での表現力が重要です。添削指導で質を高めることが不可欠です。
+                    </p>
+                </div>
+                
+                <div class="chart-container h-80">
+                    <canvas id="kokugoCorrectRateChart"></canvas>
+                </div>
+                <p class="mt-2 text-center text-sm text-slate-500">
+                    ※上記グラフの正答率は、令和6年度「府立高等学校合格者の学力実態調査」データを参考に作成。
+                </p>
+
+                <div class="section-heading">問題タイプ別：戦略的学習ガイド</div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">A問題の戦略（基礎的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>知識問題:</strong> 漢字読み書き(<span class="correct-rate-value">A:77.8%~97.8%</span>)や語彙の基礎問題を確実に全問正解。</li>
+                        <li><strong>現代文:</strong> 説明文・随筆ともに指示語・接続語、基本的な内容把握(記号選択)を正確に。(内容把握は得点源 <span class="correct-rate-value">A:74.4%</span>)。</li>
+                        <li><strong>古典:</strong> 歴史的仮名遣い(<span class="correct-rate-value">A:81.1%</span>)など基礎知識と現代語訳練習で確実な理解を。</li>
+                        <li><strong>課題作文:</strong> 指定字数(150字)に捉われず、簡単な構成で意見を簡潔に書く練習。部分点狙い。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">B問題の戦略（標準的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>知識問題:</strong> 漢字読み書き(<span class="correct-rate-value">B:74.4%~94.9%</span>)や語彙、熟語、古典の歴史的仮名遣い(<span class="correct-rate-value">B:88.2%</span>)など高正答率問題は完璧に。</li>
+                        <li><strong>現代文:</strong> 説明文・随筆ともに内容合致、主張、心情変化の理由など記号・抜き出し問題を確実に。長めの記述問題(<span class="correct-rate-value">B:38.5%</span>)も挑戦し部分点を。</li>
+                        <li><strong>古典:</strong> 基本的な古文・漢文読解を確実に(内容把握 <span class="correct-rate-value">B:50.8%</span>)。</li>
+                        <li><strong>課題作文:</strong> 字数(200-250字)に対応できる構成力・記述力を養う。根拠を具体的に示し論理的に表現。(作文 <span class="correct-rate-value">B:46.0%</span>)超えを目指す。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">C問題の戦略（発展的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>知識問題:</strong> 語句解釈(<span class="correct-rate-value">C:90.0%</span>)・適語補充(<span class="correct-rate-value">C:85.0%</span>)など高正答率記号選択問題は完答を。品詞識別(<span class="correct-rate-value">C:35.0%</span>)など難問も挑戦。</li>
+                        <li><strong>現代文:</strong> 難解語句解釈、抽象内容把握、多角的論述まで完璧に。正答率の低い記述(<span class="correct-rate-value">C:37.4%</span>, <span class="correct-rate-value">33.1%</span>)で満点狙い。</li>
+                        <li><strong>古典:</strong> 複雑な文法解釈や古典常識、和歌含む読解(漢字読み <span class="correct-rate-value">C:35.9%</span>)も確実に。</li>
+                        <li><strong>課題作文:</strong> 字数(300字)に対応し論理・表現豊かに高得点(<span class="correct-rate-value">C:54.6%</span>)を狙う。資料深掘り、論理的な意見構成を徹底。</li>
+                        <li><strong>全体:</strong> 時間内に読解をこなし、記述と作文で差をつける。速読・精読バランスを極める。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 数学 -->
+            <div class="card mb-12">
+                <h3 class="text-2xl font-bold text-[#3D5A80] mb-4">🔢 数学：図形問題が最重要課題 <span class="text-xl font-normal ml-2">(配点: 90点)</span></h3>
+                <p class="mb-4 text-slate-600">
+                    証明問題は毎年出題。特にB・C問題では全文記述が求められます。C問題は複雑な図形と関数が融合し、変数を含む高度な計算力が必須です。R6年度もこの傾向に大きな変化は見られません。
+                </p>
+
+                <div class="section-heading">大問ごとの詳細分析（R6年度データより）</div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">大問1：計算・小問集合<span class="text-slate-500 font-normal ml-2">(配点目安: 約20点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：</strong> 正の数・負の数、文字と式、式の計算、平方根、2次方程式など基礎計算。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A問題 <span class="correct-rate-value">51.9%</span> (正負の数計算)、B問題 <span class="correct-rate-value">95.2%</span> (正負の数計算)、C問題 <span class="correct-rate-value">99.2%</span> (多項式の計算)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：</strong> 迅速かつ正確な計算力を養う反復練習。C問題では複雑な計算も正確にこなす訓練が必要です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">大問2/3：関数（1次関数、関数y=ax²）<span class="text-slate-500 font-normal ml-2">(配点目安: 約20-30点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：</strong> グラフの性質理解、座標・交点計算、変域、変化の割合、面積・長さの応用。C問題では動点、変数を含む座標や線分の長さ。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A問題 <span class="correct-rate-value">80.7%</span> (2直線の位置関係)、B問題 <span class="correct-rate-value">76.1%</span> (1次関数の利用)、C問題 <span class="correct-rate-value">75.5%</span> (関数y=ax^2の値の変化)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> グラフと式の連携理解。C問題では、変数を用いた座標から方程式を立てる練習を重点的に行うことが重要です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">大問3/4：図形（平面図形、空間図形、証明）<span class="text-slate-500 font-normal ml-2">(配点目安: 約30点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：</strong> 証明問題（合同・相似は毎年出題）、円の性質、平行線と比、三平方の定理。空間図形では見取り図・展開図からの体積・表面積計算。C問題は非常に複雑。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A問題 <span class="correct-rate-value">5.7%</span> (相似比、三平方の定理の利用記述)、B問題 <span class="correct-rate-value">5.1%</span> (相似比、平行線と線分の比)、C問題 <span class="correct-rate-value">9.2%</span> (相似比、三平方の定理の利用)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：</strong> B・C問題では全文記述式の証明対策が必須。図形の性質、相似、三平方の定理を徹底理解し、応用問題演習を重ねる。補助線など発想力も鍛えることが重要です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">確率・資料の活用（統計）<span class="text-slate-500 font-normal ml-2">(配点目安: 約10-15点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：：</strong> 樹形図や表を用いた場合の数の正確な数え上げ。平均値、中央値、相対度数、ヒストグラムなど統計用語の理解と読み取り。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A問題 <span class="correct-rate-value">30.1%</span> (確率)、B問題 <span class="correct-rate-value">73.5%</span> (確率)、C問題 <span class="correct-rate-value">76.7%</span> (確率)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> 数え上げのミスをなくす練習。基本的な統計用語の意味を正確に理解し、計算できるようにすることが重要です。
+                    </p>
+                </div>
+
+                <div class="chart-container h-80">
+                    <canvas id="sugakuCorrectRateChart"></canvas>
+                </div>
+                <p class="mt-2 text-center text-sm text-slate-500">
+                    ※上記グラフの正答率は、令和6年度「府立高等学校合格者の学力実態調査」データを参考に作成。
+                </p>
+
+                <div class="section-heading">問題タイプ別：戦略的学習ガイド</div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">A問題の戦略（基礎的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>計算・小問集合:</strong> 大問1の基礎計算は全問正解。正負の数(<span class="correct-rate-value">A:51.9%~81.5%</span>)や文字と式(<span class="correct-rate-value">A:59.3%~85.9%</span>)など高正答率問題は確実に。</li>
+                        <li><strong>関数:</strong> 1次関数グラフ読み取り(<span class="correct-rate-value">A:80.7%</span>)や、基本的な式を求める問題を確実に。</li>
+                        <li><strong>図形:</strong> 穴埋め式証明(<span class="correct-rate-value">A:47.4%</span>)など誘導付き基本問題で部分点を。複雑な図形応用(<span class="correct-rate-value">A:5.7%</span>)は避ける。</li>
+                        <li><strong>確率・データ:</strong> 樹形図や表を用いた簡単な確率(<span class="correct-rate-value">A:30.1%</span>)に挑戦し、基礎用語理解を深める。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">B問題の戦略（標準的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>計算・小問集合:</strong> B問題計算問題(<span class="correct-rate-value">90%前後</span>)は完答。複雑因数分解や平方根計算の正確性を高める。</li>
+                        <li><strong>関数:</strong> B問題関数応用(<span class="correct-rate-value">76.1%</span>)は確実に得点。変域、変化の割合、面積計算をマスターし、グラフから式を立てる練習を。</li>
+                        <li><strong>図形:</strong> 証明問題(相似・合同)は全文記述で確実に得点。円の性質、平行線と比、三平方の定理の基礎応用。図形応用(<span class="correct-rate-value">B:5.1%</span>)も挑戦し部分点を。</li>
+                        <li><strong>確率・データ:</strong> やや複雑な確率問題(<span class="correct-rate-value">B:73.5%</span>)も確実に。度数分布表、ヒストグラムなど用語の正確な理解を深める。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">C問題の戦略（発展的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>計算・小問集合:</strong> C問題計算問題(<span class="correct-rate-value">90%以上</span>)は高得点源なので完璧に。</li>
+                        <li><strong>関数:</strong> C問題関数問題(<span class="correct-rate-value">75.5%</span>)は確実に解ききり得点源に。動点、変数含む複雑座標や線分の長さ、面積二等分線など応用問題に対応。</li>
+                        <li><strong>図形:</strong> 複雑な平面・空間図形(<span class="correct-rate-value">C:9.2%</span>)に挑戦し差をつける。補助線や複数定理組み合わせ応用力を。難解証明問題も論理筋道で部分点確保を。</li>
+                        <li><strong>確率・データ:</strong> C問題確率(<span class="correct-rate-value">76.7%</span>)は比較的高い正答率のため確実に得点。</li>
+                        <li><strong>全体:</strong> 思考力を問う問題を時間内に攻略するスピードを鍛える。得意分野は完答、苦手分野でも粘り強く部分点を確保。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 英語 -->
+            <div class="card mb-12">
+                <h3 class="text-2xl font-bold text-[#3D5A80] mb-4">🇬🇧 英語：C問題は「時間と情報処理」の戦い <span class="text-xl font-normal ml-2">(配点: 90点)</span></h3>
+                <p class="mb-4 text-slate-600">
+                    C問題は大学入試レベル。問題文も設問も全て英語で、速読力とリスニング力が不可欠です。リスニングの配点が約1/3を占めるため、対策の優先順位は非常に高いです。R6年度もこの傾向に変化は見られません。
+                </p>
+
+                <div class="section-heading">大問ごとの詳細分析（R6年度データより）</div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">リスニング<span class="text-slate-500 font-normal ml-2">(配点目安: A/B約20点, C約30点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題形式：</strong> 対話文、説明文。C問題は設問も英語で放送、要約記述も出題。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A/B問題 <span class="correct-rate-value">96.8%</span> (内容把握・易), <span class="correct-rate-value">29.8%</span> (内容把握・難) / C問題 <span class="correct-rate-value">67.1%</span> (内容把握・易), <span class="correct-rate-value">35.5%</span> (内容把握・英作文)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> 日常的な英語聞き取り習慣。様々なシチュエーションでの対話文聞き取り、メモ取り練習。シャドーイングも有効です。C問題の英作文は難度が高いです。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">長文読解<span class="text-slate-500 font-normal ml-2">(配点目安: A/B約60点, C約50-60点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：</strong> 物語文、説明文、Eメール、掲示板など多様。C問題は複数資料読み取り、全て英語。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A問題 <span class="correct-rate-value">35.7%</span> (内容把握)、B問題 <span class="correct-rate-value">34.1%</span> (内容把握)、C問題 <span class="correct-rate-value">30.7%</span> (大意把握)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：</strong> 多読で速読力向上。文法・語彙総動員で正確な内容把握。C問題は「英語のまま」理解する訓練。接続詞・指示語の把握が鍵となります。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">英作文<span class="text-slate-500 font-normal ml-2">(配点目安: A約5点, B約10点, C約5-10点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題形式：</strong> 質問応答、与えられたテーマに対する自由記述、資料からの記述。A:約5語、B:約20語、C:字数制限なし（自由英作）。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A問題 <span class="correct-rate-value">3.3%</span> (英作文記述)、B問題 <span class="correct-rate-value">21.5%</span> (英作文記述)、C問題 <span class="correct-rate-value">34.7%</span> (英作文記述)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> 基本構文での正確な表現練習。C問題は簡潔な表現を心がけ、解答スペースの8割以上を埋める意識が重要です。
+                    </p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="sub-section-title">文法・語彙（主にA問題）<span class="text-slate-500 font-normal ml-2">(配点目安: 約10点)</span></h4>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">主な出題単元：：</strong> 時制、関係代名詞、助動詞、不定詞、分詞など。C問題では複雑な構文の語句選択も。
+                    </p>
+                    <p class="mb-2 detail-text">
+                        <strong class="text-blue-700">R6年度正答率：</strong> A問題 <span class="correct-rate-value">99.1%</span> (語彙・文法記号選択)、B問題 <span class="correct-rate-value">45.2%</span> (適語補充)、C問題 <span class="correct-rate-value">70.0%</span> (語彙・文法記号選択)
+                    </p>
+                    <p class="detail-text">
+                        <strong class="text-blue-700">対策：：</strong> 教科書レベルの文法事項を完璧にマスター。主要な単語・熟語を覚える。C問題は複雑構文も理解することが重要です。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-6">
+                    <div class="stat-card">
+                        <div class="text-slate-700 text-lg mb-2">難関校(文理学科)受験生の</div>
+                        <div class="stat-number text-[#00A1E4]">59.9%</div>
+                        <div class="text-slate-700 text-lg mt-2">が外部英語検定(英検®など)を活用しています。</div>
+                    </div>
+                    <div class="chart-container h-80">
+                        <canvas id="eigoCorrectRateChart"></canvas>
+                    </div>
+                </div>
+                <p class="mt-2 text-center text-sm text-slate-500">
+                    C問題ではリスニングの配点が突出。英検®等の活用は、この高難易度試験で得点を確保する最有力な戦略です。<br>
+                    ※上記グラフの正答率は、令和6年度「府立高等学校合格者の学力実態調査」データを参考に作成。
+                </p>
+
+                <div class="section-heading">問題タイプ別：戦略的学習ガイド</div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">A問題の戦略（基礎的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>リスニング:</strong> 易しい内容把握(<span class="correct-rate-value">A/B:64.6%~96.8%</span>)は確実に。短い英文から必要な情報を聞き取る練習を。</li>
+                        <li><strong>長文読解:</strong> 易しい長文内容合致、単語・熟語空欄補充、キーワード探索練習。内容把握(<span class="correct-rate-value">A:35.7%</span>)は記号選択を中心に。</li>
+                        <li><strong>文法・語彙:</strong> 基本的な語彙・文法(<span class="correct-rate-value">A:99.1%</span>)は必ず正解。教科書レベルの基本文法を確実に。</li>
+                        <li><strong>英作文:</strong> 約5語程度の短い質問応答。簡単な英文作成練習を。<span class="correct-rate-value">A:3.3%</span>と低いが部分点狙いで挑戦。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">B問題の戦略（標準的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>リスニング:</strong> やや長めの対話・説明文聞き取り。内容把握(<span class="correct-rate-value">A/B:60%台</span>)で得点。メモ取り練習を重ねる。</li>
+                        <li><strong>長文読解:</strong> 難度高めの長文読解。内容把握(<span class="correct-rate-value">B:34.1%</span>)は選択肢を中心に確実に。接続詞・指示語に注目し論理展開を追う。</li>
+                        <li><strong>文法・語彙:</strong> 中学主要文法(不定詞、動名詞、関係代名詞など)を完璧に。熟語も。適語補充(<span class="correct-rate-value">B:45.2%</span>)も挑戦。</li>
+                        <li><strong>英作文:</strong> 約20語程度の英作文(<span class="correct-rate-value">B:21.5%</span>)。テーマに対して簡潔に意見・経験を表現。正確な構文とスペリングを。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">C問題の戦略（発展的学力向け）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>リスニング:</strong> 設問も英語の聞き取り問題。英作文含む聞き取り(<span class="correct-rate-value">C:35.5%</span>)で高得点狙い。シャドーイング・ディクテーションで英語耳を鍛える。</li>
+                        <li><strong>長文読解:</strong> 全て英語の長文を制限時間内に速読・精読。複数資料読解、複雑要約・説明記述で満点を目指す。高得点問題は確実に取る(<span class="correct-rate-value">C:30.7%~70.0%</span>)。</li>
+                        <li><strong>英作文:</strong> 字数制限なし自由英作(<span class="correct-rate-value">C:34.7%</span>)。論理的で説得力ある意見を表現。豊富な語彙・多様な構文を使いこなす。添削で洗練。</li>
+                        <li><strong>文法・語彙:</strong> 語彙・文法記号選択(<span class="correct-rate-value">C:70.0%</span>)は得点源。複雑構文も理解できるよう学習。</li>
+                        <li><strong>全体:</strong> 英検取得を早期に目指し、入試負担軽減。時間管理を徹底し、C問題を効率的に解き進める訓練を。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 理科 -->
+            <div class="card mb-12">
+                <h3 class="text-2xl font-bold text-[#3D5A80] mb-4">🧪 理科：実験・観察の読解力が鍵 <span class="text-xl font-normal ml-2">(配点: 90点)</span></h3>
+                <p class="mb-4 text-slate-600">
+                    物理・化学・生物・地学の4分野から均等に出題。小問集合はなく、全てが実験・観察をテーマにした大問です。問題文から条件を読み解く思考力が問われます。R6年度もこの傾向に大きな変化は見られません。
+                </p>
+
+                <div class="section-heading">大問ごとの詳細分析（R6年度データより）</div>
+                <p class="text-slate-600 mb-4">理科は各分野から1題ずつの出題。単なる知識ではなく、実験結果の考察や計算力が問われるため、問題文の読解が重要です。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">生物分野<span class="text-slate-500 font-normal ml-2">(配点目安: 約20-25点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題単元：</strong> 植物の構造と生殖、細胞/光合成と呼吸、生物の成長とふえ方、動物の分類と働き。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">86.1%</span> (昆虫類記号選択)、<span class="correct-rate-value">6.4%</span> (遺伝子の組み合わせ)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：</strong> 用語や現象を正確にマスター。顕微鏡操作や観察方法も理解。特に遺伝分野は難度が高いため、基礎を確実に固めます。
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">化学分野<span class="text-slate-500 font-normal ml-2">(配点目安: 約20-25点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題単元：</strong> 水溶液の性質、物質の区別、気体の性質、化学変化と物質の質量、イオン。計算問題が多い。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">88.9%</span> (金属記号選択)、<span class="correct-rate-value">36.3%</span> (イオンがもつ電子数計算)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：</strong> 計算問題は毎年出題されるため、グラフや数値の正確な読み取りを含め徹底練習。化学式・化学反応式を正確に書けるようにします。
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">物理分野<span class="text-slate-500 font-normal ml-2">(配点目安: 約20-25点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題単元：</strong> 光の性質、音の性質/力のはたらき、電流の性質、力と運動、仕事とエネルギー。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">86.3%</span> (力の向きと運動の向き)、<span class="correct-rate-value">28.4%</span> (運動エネルギーの比較論述)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：：</strong> 用語・現象の定義、法則を正確に理解。様々な状況で応用できるよう練習。論述問題対策も重要です。
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">地学分野<span class="text-slate-500 font-normal ml-2">(配点目安: 約20-25点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題単元：</strong> 天体の動きと地球の自転・公転、地層と過去のようす、太陽系と惑星、気象観測と空気中の水蒸気。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">83.6%</span> (流水のはたらき)、<span class="correct-rate-value">16.3%</span> (火山灰層の地表からの深さ計算)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：：</strong> 天体や気象の動きを図やグラフと関連付けて理解。地層の計算問題は正答率が低い傾向です。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="chart-container h-80">
+                    <canvas id="rikaCorrectRateChart"></canvas>
+                </div>
+                <p class="mt-2 text-center text-sm text-slate-500">
+                    ※上記グラフの正答率は、令和6年度「府立高等学校合格者の学力実態調査」データを参考に作成。
+                </p>
+
+                <div class="section-heading">偏差値別：戦略的学習ガイド</div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">偏差値40レベル（目標正答率: 40-50%）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>全分野共通:</strong> 基本用語定義、実験器具・観察結果読み取りなど高正答率の基礎知識問題(<span class="correct-rate-value">70-90%台</span>)を確実に。</li>
+                        <li><strong>生物:</strong> 植物・動物名称・分類(<span class="correct-rate-value">86.1%</span>)、基本的生命活動(光合成、呼吸)の基礎を固める。</li>
+                        <li><strong>化学:</strong> 身近な物質性質(<span class="correct-rate-value">88.9%</span>)、気体発生方法(例:水素、二酸化炭素)など基礎知識を徹底。</li>
+                        <li><strong>物理:</strong> 光反射・屈折、音伝わり方、簡単な力作用(<span class="correct-rate-value">86.3%</span>)など基礎物理現象を理解。</li>
+                        <li><strong>地学:</strong> 天体基本動き(例:月の満ち欠け、星座)、地層基本種類(<span class="correct-rate-value">83.6%</span>)をマスター。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">偏差値50レベル（目標正答率: 60-70%）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>全分野共通:</strong> 実験データ・図表を正確に読み取り結論を記述。基本的な計算問題(<span class="correct-rate-value">40-70%台</span>)も確実に。</li>
+                        <li><strong>生物:</strong> 遺伝の法則、食物連鎖・生態系の基本的概念を理解。胚珠(<span class="correct-rate-value">59.2%</span>)など、やや正答率が落ちる知識問題も確実に。</li>
+                        <li><strong>化学:</strong> 化学反応式、水溶液性質(酸・アルカリ、中和)、イオン基礎をマスター。質量保存法則簡単な計算(<span class="correct-rate-value">36.3%</span>)に挑戦し部分点を。</li>
+                        <li><strong>物理:</strong> オーム法則回路計算、運動法則(速さ、平均 <span class="correct-rate-value">54.9%</span>)。仕事・エネルギー基礎(<span class="correct-rate-value">40.8%</span>)を理解し応用問題に。</li>
+                        <li><strong>地学:</strong> 地震メカニズム(P波、S波)、天気図・前線種類。地球自転・公転と天体の見かけ動き。地図・柱状図読み取り(<span class="correct-rate-value">53.0%</span>)も確実に。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">偏差値60レベル（目標正答率: 75%以上）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>全分野共通:</strong> 複雑な実験設定、複数条件絡む考察(<span class="correct-rate-value">20-40%台</span>)や応用計算(<span class="correct-rate-value">10-30%台</span>)。論述問題(<span class="correct-rate-value">28.4%</span>)は高得点狙い。</li>
+                        <li><strong>生物:</strong> 生体内環境恒常性、遺伝法則応用問題。難度高い遺伝子組み合わせ問題(<span class="correct-rate-value">6.4%</span>)で差をつける。</li>
+                        <li><strong>化学:</strong> イオン・原子・分子レベルの化学変化理解。質量変化複雑計算。イオンなりやすさ論述(<span class="correct-rate-value">42.5%</span>)なども確実に。</li>
+                        <li><strong>物理:</strong> 複雑回路計算、力学的エネルギー保存法則、仕事原理応用。運動エネルギー比較論述(<span class="correct-rate-value">28.4%</span>)など低正答率論述で得点。</li>
+                        <li><strong>地学:</strong> 地層対比、天気図深掘り、天体の見かけ動きを緯度・季節関連付け考察。火山灰層深さ計算(<span class="correct-rate-value">16.3%</span>)など難解計算も挑戦。</li>
+                        <li><strong>全体:</strong> 苦手分野をなくし、全分野で高得点を安定して取れるように。問題文を素早く正確に読み解く訓練を徹底。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 社会 -->
+            <div class="card mb-12">
+                <h3 class="text-2xl font-bold text-[#3D5A80] mb-4">🌐 社会：分野横断と資料読解 <span class="text-xl font-normal ml-2">(配点: 90点)</span></h3>
+                <p class="mb-4 text-slate-600">
+                    地理、歴史、公民の3分野が1つの大問の中に混在して出題されることが特徴です。良問が多く採用されるため、他府県よりも対策が難しい傾向にあります。単なる知識の暗記だけでなく、資料の読み取りや時事問題への関心、そして論理的な記述力が求められます。R6年度もこの傾向に大きな変化は見られません。
+                </p>
+
+                <div class="section-heading">大問ごとの詳細分析（R6年度データより）</div>
+                <p class="text-slate-600 mb-4">社会は分野融合問題が特徴。単なる暗記ではなく、資料の正確な読み取りと論理的な記述力が求められます。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">地理分野<span class="text-slate-500 font-normal ml-2">(配点目安: 約25点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題単元：</strong> 世界・日本の地理（気候帯、産業、文化、人口）、地域調査。統計資料や地図記号・等高線読み取り。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">92.9%</span> (県名・県庁所在地)、<span class="correct-rate-value">28.1%</span> (世界の茶の生産国)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：</strong> 基本的な事実と用語を確実に復習。グラフや図表から情報を正確に読み取る練習。難度の高い統計資料の読み取りも対応できるようにします。
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">歴史分野<span class="text-slate-500 font-normal ml-2">(配点目安: 約25点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題単元：：</strong> 原始・古代〜近現代。出来事の因果関係、人物の役割、文化・制度。年代（縦の流れ）と同時代の他国の動き（横の流れ）。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">76.9%</span> (大老・京都所司代)、<span class="correct-rate-value">22.1%</span> (19世紀後半の世界のようす)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：</strong> 歴史の流れをテーマごとに整理し、縦と横のつながりを意識。史料からの情報読み取りと考察力養成。複雑な世界史との関連も踏まえます。
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">公民分野<span class="text-slate-500 font-normal ml-2">(配点目安: 約30点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題単元：：</strong> 政治・経済の仕組み、日本国憲法、三権分立、国際関係、時事問題。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">84.9%</span> (株主)、<span class="correct-rate-value">6.3%</span> (幸福追求)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：：</strong> 最も割合が高いため集中して学習。時事問題対策としてニュースに関心を持つ。グラフ問題は落ち着いて取り組みます。
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="sub-section-title">文章記述問題（融合問題含む）<span class="text-slate-500 font-normal ml-2">(配点目安: 約10点)</span></h4>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">主な出題形式：</strong> 資料を読み取って答える穴埋め形式。指定用語を用いて論理的・簡潔にまとめる。地理・歴史・公民の融合問題内に出題。
+                        </p>
+                        <p class="mb-2 detail-text">
+                            <strong class="text-blue-700">R6年度正答率：</strong> <span class="correct-rate-value">19.7%</span> (日米貿易摩擦記述)、<span class="correct-rate-value">31.5%</span> (社会保障給付費記述)、<span class="correct-rate-value">40.2%</span> (農業経営体の耕地面積記述)
+                        </p>
+                        <p class="detail-text">
+                            <strong class="text-blue-700">対策：</strong> 資料から必要な情報を抽出し、指定語句を用いて論理的にまとめる練習。難度の高い記述問題は部分点狙いです。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="chart-container h-80">
+                    <canvas id="shakaiCorrectRateChart"></canvas>
+                </div>
+                <p class="mt-2 text-center text-sm text-slate-500">
+                    ※上記グラフの正答率は、令和6年度「府立高等学校合格者の学力実態調査」データを参考に作成。
+                </p>
+
+                <div class="section-heading">偏差値別：戦略的学習ガイド</div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">偏差値40レベル（目標正答率: 40-50%）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>地理:</strong> 主要国場所、気候帯、日本地方区分、主要都市位置。県名・県庁所在地問題(<span class="correct-rate-value">90%台</span>)は確実に。簡単な統計グラフ読み取り。</li>
+                        <li><strong>歴史:</strong> 縄文~江戸主要出来事・人物、重要年号暗記。易しい選択問題(<span class="correct-rate-value">60-70%台</span>)は確実に。</li>
+                        <li><strong>公民:</strong> 憲法三大原則、三権分立、国会役割。基礎用語問題(<span class="correct-rate-value">50-80%台</span>)は確実に。簡単な時事問題用語。</li>
+                        <li><strong>文章記述:</strong> 資料中キーワード抜き出し、短い穴埋め形式。記述問題(<span class="correct-rate-value">10-40%台</span>)は部分点狙い。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">偏差値50レベル（目標正答率: 60-70%）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>地理:</strong> 世界主要産業・貿易、環境問題。統計資料読み取り・傾向分析(<span class="correct-rate-value">50-60%台</span>)。日本各地域特色、地形、農業・工業。</li>
+                        <li><strong>歴史:</strong> 明治~現代主要出来事・人物、背景・因果関係。同時代内外の動き(横の流れ)意識。史料基本的読み取り。中難度選択問題(<span class="correct-rate-value">50-60%台</span>)は確実に。</li>
+                        <li><strong>公民:</strong> 政治・経済仕組み(財政、金融、市場経済)、国際社会仕組み。基本人権、環境問題。公民問題(<span class="correct-rate-value">50-70%台</span>)は確実に。時事問題に関心を。</li>
+                        <li><strong>文章記述:</strong> 資料を読み取り、指定語句で簡潔にまとめる記述問題(<span class="correct-rate-value">30-40%台</span>)。論理的つながりを意識した練習を。</li>
+                    </ul>
+                </div>
+                <div class="strategy-level">
+                    <h4 class="strategy-level-title">偏差値60レベル（目標正答率: 75%以上）</h4>
+                    <ul class="strategy-list">
+                        <li><strong>地理:</strong> 気候変動、SDGs、グローバル化など現代課題と地理的背景考察。複数資料比較・分析、多角的に論じる。難解統計読み取り(<span class="correct-rate-value">20-30%台</span>)で差を。</li>
+                        <li><strong>歴史:</strong> 各時代文化・社会制度詳細理解。複雑因果関係や多角的視点で歴史考察。未見史料読み解き、歴史背景関連付け説明記述。低正答率歴史問題(<span class="correct-rate-value">20%台</span>)も得点狙い。</li>
+                        <li><strong>公民:</strong> 政治・経済具体政策・課題、国際問題への深い理解。経済指標分析、福祉国家理念、地方自治課題など専門内容。時事問題は背景まで理解。低正答率公民問題(<span class="correct-rate-value">6%</span>幸福追求)も対応。</li>
+                        <li><strong>全体:</strong> 時間配分意識、多様な分野融合問題に迅速対応。知識暗記だけでなく、思考力・判断力・表現力を総合的に高める。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-16 text-center">
+             <div class="card p-8 bg-[#3D5A80] text-white">
+                <h2 class="text-3xl font-bold mb-6">結論：合格への戦略的アプローチ</h2>
+                <div class="max-w-2xl mx-auto text-left space-y-4">
+                    <div class="flex items-start"><span class="text-2xl text-[#98DBC6] mr-3">✅</span><span><strong class="font-semibold">基礎の徹底：</strong>中学で学習する基礎知識の盤石化は、全科目の土台となります。特に国語の漢字・語句・文法、数学の計算問題、英語の文法・語彙は、高得点のカギを握る得点源であり、継続的な反復練習によりケアレスミスをなくすことが重要です。基礎が固まることで、応用問題への理解度も飛躍的に向上します。</span></div>
+                    <div class="flex items-start"><span class="text-2xl text-[#98DBC6] mr-3">✅</span><span><strong class="font-semibold">時間配分の習得：</strong>大阪府公立高校入試は、限られた時間内で多くの問題を処理する能力が求められます。過去問演習は単なる知識の確認ではなく、本番を想定した時間配分のシミュレーションとして活用しましょう。特に英語のC問題のように、問題量が多く「時間との勝負」となる科目では、効率的な問題処理能力と、どの問題にどれだけ時間をかけるべきかの判断力が合否に直結します。本番での焦りをなくすためにも、普段から時間を計って問題を解く習慣をつけましょう。</span></div>
+                    <div class="flex items-start"><span class="text-2xl text-[#98DBC6] mr-3">✅</span><span><strong class="font-semibold">記述力の養成：</strong>国語の作文や記述問題、数学の証明問題、社会の文章記述問題など、記述力を要する問題は配点が高く、受験生間の得点差がつきやすい領域です。これらの問題は、単に知識を問うだけでなく、論理的思考力、表現力、そして文章構成力が総合的に試されます。早期から対策を開始し、自分の考えを的確に、そして簡潔に表現する練習を重ねましょう。学校や塾の先生による添削指導を積極的に活用し、質の高い解答を作成する力を養うことが合格への近道です。</span></div>
+                    <div class="flex items-start"><span class="text-2xl text-[#98DBC6] mr-3">✅</span><span><strong class="font-semibold">戦略的選択：</strong>自身の学力レベルと志望校の特性を正確に把握し、A・B・C問題のどのタイプで受験するかを戦略的に選択することは、合格可能性を最大化するために不可欠です。例えば、難関校を目指すのであればC問題対策に特化し、基礎学力に不安がある場合はAまたはB問題を採用する高校を検討するなど、現実的な目標設定とそれに応じた学習計画を立てることが重要です。特に英語においては、英検などの外部英語検定を早期に取得することで、入試本番での英語の負担を軽減し、他の科目へ時間を振り向ける強力な戦略的優位性が生まれます。</span></div>
+                    <div class="flex items-start"><span class="text-2xl text-[#98DBC6] mr-3">✅</span><span><strong class="font-semibold">最新情報のキャッチアップ：</strong>大阪府の高校入試制度は、少子化や私立高校無償化などの社会情勢の変化（少子化、私立高校無償化など）に伴い、今後も見直しが検討される可能性があります。受験生と保護者は、大阪府教育委員会の公式サイトや、大手学習塾が提供する最新の入試情報を継続的に収集し、自身の学習計画に柔軟に反映させる姿勢が求められます。入試制度や出題傾向の変更に迅速に対応することで、常に最適な戦略で学習を進め、より確実な合格を目指すことができるでしょう。</span></div>
+                </div>
+                <p class="mt-8 text-slate-300">このデータを活用し、生徒一人ひとりに最適な指導を行いましょう。</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const brilliantBlues = {
+                brightBlue: '#00A1E4',
+                darkSlateBlue: '#3D5A80',
+                lightTeal: '#98DBC6',
+                yellow: '#FFDE7D',
+                pink: '#F6416C',
+                lightGrey: '#F2F2F2',
+                lightCyan: '#E0FBFC'
+            };
+            
+            const tooltipConfig = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            };
+
+            const wrapLabel = (str, maxWidth) => {
+                if (str.length <= maxWidth) return str;
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                }
+                if (currentLine) lines.push(currentLine.trim());
+                return lines;
+            };
+
+            new Chart(document.getElementById('abcSkillsChart').getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ['基礎知識', '応用力', '記述・表現力', '速読・処理速度', '思考力'],
+                    datasets: [{
+                        label: 'A問題 (基礎)',
+                        data: [5, 2, 2, 2, 2],
+                        backgroundColor: 'rgba(152, 219, 198, 0.4)',
+                        borderColor: brilliantBlues.lightTeal,
+                        pointBackgroundColor: brilliantBlues.lightTeal,
+                    }, {
+                        label: 'B問題 (標準)',
+                        data: [4, 4, 4, 3, 4],
+                        backgroundColor: 'rgba(0, 161, 228, 0.4)',
+                        borderColor: brilliantBlues.brightBlue,
+                        pointBackgroundColor: brilliantBlues.brightBlue,
+                    }, {
+                        label: 'C問題 (発展)',
+                        data: [3, 5, 5, 5, 5],
+                        backgroundColor: 'rgba(61, 90, 128, 0.4)',
+                        borderColor: brilliantBlues.darkSlateBlue,
+                        pointBackgroundColor: brilliantBlues.darkSlateBlue,
+                    }]
+                },
+                options: { ...tooltipConfig, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 5 } } }
+            });
+
+            new Chart(document.getElementById('kokugoCorrectRateChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('説明文 (B)', 16), wrapLabel('説明文 (C)', 16),
+                        wrapLabel('随筆/エッセイ (B)', 16), wrapLabel('随筆/エッセイ (C)', 16),
+                        wrapLabel('古典 (B)', 16), wrapLabel('古典 (C)', 16),
+                        wrapLabel('知識問題 (B)', 16), wrapLabel('知識問題 (C)', 16),
+                        wrapLabel('課題作文 (B)', 16), wrapLabel('課題作文 (C)', 16)
+                    ],
+                    datasets: [{
+                        label: 'R6年度正答率 (%)',
+                        data: [50.3, 60.9, 38.5, 37.4, 88.2, 90.9, 94.9, 88.2, 46.0, 54.6],
+                        backgroundColor: [
+                            brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue,
+                            brilliantBlues.brightBlue, brilliantBlues.brightBlue,
+                            brilliantBlues.lightTeal, brilliantBlues.lightTeal,
+                            brilliantBlues.yellow, brilliantBlues.yellow,
+                            brilliantBlues.pink, brilliantBlues.pink
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...tooltipConfig,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, title: { display: true, text: '正答率 (%)' } },
+                        x: { title: { display: true, text: '大問 / 問題タイプ' } }
+                    },
+                    plugins: { ...tooltipConfig.plugins, legend: { display: false } }
+                }
+            });
+
+            new Chart(document.getElementById('sugakuCorrectRateChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('計算・小問 (A)', 16), wrapLabel('計算・小問 (B)', 16), wrapLabel('計算・小問 (C)', 16),
+                        wrapLabel('関数 (A)', 16), wrapLabel('関数 (B)', 16), wrapLabel('関数 (C)', 16),
+                        wrapLabel('図形・証明 (A)', 16), wrapLabel('図形・証明 (B)', 16), wrapLabel('図形・証明 (C)', 16),
+                        wrapLabel('確率・データ (A)', 16), wrapLabel('確率・データ (B)', 16), wrapLabel('確率・データ (C)', 16)
+                    ],
+                    datasets: [{
+                        label: 'R6年度正答率 (%)',
+                        data: [51.9, 95.2, 99.2, 80.7, 76.1, 75.5, 5.7, 5.1, 9.2, 30.1, 73.5, 76.7],
+                        backgroundColor: [
+                            brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue,
+                            brilliantBlues.brightBlue, brilliantBlues.brightBlue, brilliantBlues.brightBlue,
+                            brilliantBlues.lightTeal, brilliantBlues.lightTeal, brilliantBlues.lightTeal,
+                            brilliantBlues.yellow, brilliantBlues.yellow, brilliantBlues.yellow
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...tooltipConfig,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, title: { display: true, text: '正答率 (%)' } },
+                        x: { title: { display: true, text: '大問 / 問題タイプ' } }
+                    },
+                    plugins: { ...tooltipConfig.plugins, legend: { display: false } }
+                }
+            });
+            
+            new Chart(document.getElementById('eigoCorrectRateChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('リスニング (A/B) 易', 16), wrapLabel('リスニング (A/B) 難', 16), wrapLabel('リスニング (C) 易', 16), wrapLabel('リスニング (C) 難', 16),
+                        wrapLabel('長文読解 (A)', 16), wrapLabel('長文読解 (B)', 16), wrapLabel('長文読解 (C)', 16),
+                        wrapLabel('英作文 (A)', 16), wrapLabel('英作文 (B)', 16), wrapLabel('英作文 (C)', 16),
+                        wrapLabel('文法・語彙 (A)', 16), wrapLabel('文法・語彙 (B)', 16), wrapLabel('文法・語彙 (C)', 16)
+                    ],
+                    datasets: [{
+                        label: 'R6年度正答率 (%)',
+                        data: [96.8, 29.8, 67.1, 35.5, 35.7, 34.1, 30.7, 3.3, 21.5, 34.7, 99.1, 45.2, 70.0],
+                        backgroundColor: [
+                            brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue,
+                            brilliantBlues.brightBlue, brilliantBlues.brightBlue, brilliantBlues.brightBlue,
+                            brilliantBlues.lightTeal, brilliantBlues.lightTeal, brilliantBlues.lightTeal,
+                            brilliantBlues.yellow, brilliantBlues.yellow, brilliantBlues.yellow
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...tooltipConfig,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, title: { display: true, text: '正答率 (%)' } },
+                        x: { title: { display: true, text: '大問 / 問題タイプ' } }
+                    },
+                    plugins: { ...tooltipConfig.plugins, legend: { display: false } }
+                }
+            });
+
+            new Chart(document.getElementById('rikaCorrectRateChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('生物分野 (易)', 16), wrapLabel('生物分野 (難)', 16),
+                        wrapLabel('化学分野 (易)', 16), wrapLabel('化学分野 (難)', 16),
+                        wrapLabel('物理分野 (易)', 16), wrapLabel('物理分野 (難)', 16),
+                        wrapLabel('地学分野 (易)', 16), wrapLabel('地学分野 (難)', 16)
+                    ],
+                    datasets: [{
+                        label: 'R6年度正答率 (%)',
+                        data: [86.1, 6.4, 88.9, 36.3, 86.3, 28.4, 83.6, 16.3],
+                        backgroundColor: [
+                            brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue,
+                            brilliantBlues.brightBlue, brilliantBlues.brightBlue,
+                            brilliantBlues.lightTeal, brilliantBlues.lightTeal,
+                            brilliantBlues.yellow, brilliantBlues.yellow
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...tooltipConfig,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, title: { display: true, text: '正答率 (%)' } },
+                        x: { title: { display: true, text: '分野 / 問題タイプ' } }
+                    },
+                    plugins: { ...tooltipConfig.plugins, legend: { display: false } }
+                }
+            });
+
+            new Chart(document.getElementById('shakaiCorrectRateChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('地理分野 (易)', 16), wrapLabel('地理分野 (難)', 16),
+                        wrapLabel('歴史分野 (易)', 16), wrapLabel('歴史分野 (難)', 16),
+                        wrapLabel('公民分野 (易)', 16), wrapLabel('公民分野 (難)', 16),
+                        wrapLabel('文章記述 (難)', 16)
+                    ],
+                    datasets: [{
+                        label: 'R6年度正答率 (%)',
+                        data: [92.9, 28.1, 76.9, 22.1, 84.9, 6.3, 19.7],
+                        backgroundColor: [
+                            brilliantBlues.darkSlateBlue, brilliantBlues.darkSlateBlue,
+                            brilliantBlues.brightBlue, brilliantBlues.brightBlue,
+                            brilliantBlues.lightTeal, brilliantBlues.lightTeal,
+                            brilliantBlues.yellow
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...tooltipConfig,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, title: { display: true, text: '正答率 (%)' } },
+                        x: { title: { display: true, text: '分野 / 問題タイプ' } }
+                    },
+                    plugins: { ...tooltipConfig.plugins, legend: { display: false } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
