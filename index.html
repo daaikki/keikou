@@ -118,6 +118,18 @@
             margin-right: 0.5rem;
             flex-shrink: 0;
         }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 767px) {
+            .section-heading {
+                font-size: 1.5rem; /* Slightly smaller for mobile */
+                padding: 0.75rem 1rem; /* Adjust padding too */
+            }
+            .strategy-list li {
+                font-size: 0.875rem; /* text-sm for better fit */
+                margin-bottom: 0.3rem; /* Slightly less margin for compactness */
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -690,10 +702,10 @@
                 <div class="strategy-level">
                     <h4 class="strategy-level-title">偏差値60レベル（目標正答率: 75%以上）</h4>
                     <ul class="strategy-list">
-                        <li><strong>地理:</strong> 気候変動、SDGs、グローバル化など現代課題と地理的背景考察。複数資料比較・分析、多角的に論じる。難解統計読み取り(<span class="correct-rate-value">20-30%台</span>)で差を。</li>
-                        <li><strong>歴史:</strong> 各時代文化・社会制度詳細理解。複雑因果関係や多角的視点で歴史考察。未見史料読み解き、歴史背景関連付け説明記述。低正答率歴史問題(<span class="correct-rate-value">20%台</span>)も得点狙い。</li>
-                        <li><strong>公民:</strong> 政治・経済具体政策・課題、国際問題への深い理解。経済指標分析、福祉国家理念、地方自治課題など専門内容。時事問題は背景まで理解。低正答率公民問題(<span class="correct-rate-value">6%</span>幸福追求)も対応。</li>
-                        <li><strong>全体:</strong> 時間配分意識、多様な分野融合問題に迅速対応。知識暗記だけでなく、思考力・判断力・表現力を総合的に高める。</li>
+                        <li><strong>地理:</strong> 現代課題と地理考察、複数資料分析、難解統計で差をつける。</li>
+                        <li><strong>歴史:</strong> 各時代文化・制度を深く理解、複雑な因果関係や史料を考察、低正答率問題も狙う。</li>
+                        <li><strong>公民:</strong> 政治経済・国際問題の深い理解、時事問題の背景把握、低正答率問題も対応。</li>
+                        <li><strong>全体:</strong> 時間配分・分野融合問題対応。思考力・判断力・表現力を総合的に高める。</li>
                     </ul>
                 </div>
             </div>
